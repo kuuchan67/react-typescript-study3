@@ -24,7 +24,7 @@ export const Header: VFC = memo(() => {
         bg="teal.500"
         color="gray.50"
         align="center"
-        justify="space-bitween"
+        justify="space-between"
         padding={{ base: 3, md: 5 }}
       >
         <Flex as="a" align="center" mr={8} _hover={{ cursor: "pointer" }}>
@@ -43,6 +43,7 @@ export const Header: VFC = memo(() => {
           </Box>
           <Link>設定</Link>
         </Flex>
+
         <IconButton
           aria-label="メニューボタン"
           icon={<HamburgerIcon />}
@@ -55,7 +56,7 @@ export const Header: VFC = memo(() => {
       <Drawer placement="right" size="xs" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay>
           <DrawerContent>
-            <DrawerBody p={0} bg="gray.100">
+            <DrawerBody as="nav" p={0} bg="gray.100">
               <Button w="100%">Home</Button>
               <Button w="100%">ユーザ一覧</Button>
               <Button w="100%">設定</Button>
