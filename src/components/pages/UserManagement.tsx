@@ -1,23 +1,14 @@
 import { memo, useCallback, useEffect, VFC } from "react";
 import {
   Center,
-  FormControl,
-  FormLabel,
-  Input,
-  ModalBody,
-  Modal,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
   Spinner,
-  Stack,
   useDisclosure,
   Wrap,
   WrapItem
 } from "@chakra-ui/react";
 
 import { UserCard } from "../organisms/user/UserCard";
+import { UserDetailModal } from "../organisms/user/UserDetailModal";
 import { useAllUsers } from "../../hooks/useAllUsers";
 
 export const UserManagement: VFC = memo(() => {
@@ -46,21 +37,7 @@ export const UserManagement: VFC = memo(() => {
           ))}
         </Wrap>
       )}
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>ユーザ詳細</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Stack>
-              <FormControl>
-                <FormLabel>名前</FormLabel>
-                <Input value="namae" isReadOnly />
-              </FormControl>
-            </Stack>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+      <UserDetailModal isOpen={isOpen} onClose={onClose} />
     </>
   );
 });
