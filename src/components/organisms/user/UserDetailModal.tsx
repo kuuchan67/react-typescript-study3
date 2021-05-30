@@ -20,12 +20,7 @@ type Props = {
 export const UserDetailModal: VFC<Props> = memo((props) => {
   const { isOpen, onClose } = props;
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      autoFocus={false}
-      motionPreset={"slideInBottom"}
-    >
+    <Modal isOpen={isOpen} onClose={onClose} autoFocus={false}>
       <ModalOverlay />
       <ModalContent pb={6}>
         <ModalHeader>ユーザ詳細</ModalHeader>
