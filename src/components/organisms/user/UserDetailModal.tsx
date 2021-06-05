@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, VFC } from "react";
+import { ChangeEvent, memo, useEffect, useState, VFC } from "react";
 import {
   FormControl,
   FormLabel,
@@ -17,7 +17,7 @@ import { User } from "../../../types/api/user";
 import { PrimaryButton } from "../../atoms/button/PrimaryButton";
 
 type Props = {
-  user: User | null;
+  user: User | undefined;
   isOpen: boolean;
   isAdmin?: boolean;
   onClose: () => void;
@@ -26,18 +26,38 @@ type Props = {
 export const UserDetailModal: VFC<Props> = memo((props) => {
   const { user, isOpen, isAdmin = false, onClose } = props;
 
-  const [username, setUsernname] = useState("");
+  const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
 
   useEffect(() => {
-    setUsernname(user?.useraname ?? "");
+    setUsername(user?.username ?? "");
     setName(user?.name ?? "");
     setEmail(user?.email ?? "");
     setPhone(user?.phone ?? "");
   }, [user]);
-  const onClickUpdate = () => alert();
+
+  const onChangeUserName = (e: ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
+  };
+
+  const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+  const onChangePhone = (e: ChangeEvent<HTMLInputElement>) => {
+    setPhone(e.target.value);
+  };
+  const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
+  const onClickUpdate = () => {
+    console.log(username);
+    console.log(name);
+    console.log(email);
+    console.log(phone);
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} autoFocus={false}>
@@ -49,19 +69,37 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
           <Stack spacing={4}>
             <FormControl>
               <FormLabel>名前</FormLabel>
-              <Input value={username} isReadOnly={!isAdmin} />
+              <Input
+                value={username}
+                isReadOnly={!isAdmin}
+                onChange={onChangeUserName}
+              />
             </FormControl>
             <FormControl>
               <FormLabel>フルネーム</FormLabel>
-              <Input value={name} isReadOnly={!isAdmin} />
+              <Input
+                value={name}
+                isReadOnly={!isAdmin}
+                onChange={onChangeName}
+              />
             </FormControl>
             <FormControl>
               <FormLabel>メール</FormLabel>
-              <Input value={email} isReadOnly={!isAdmin} />
+              <Input
+                type="email"
+                value={email}
+                isReadOnly={!isAdmin}
+                onChange={onChangeEmail}
+              />
             </FormControl>
             <FormControl>
               <FormLabel>TEL</FormLabel>
-              <Input value={phone} isReadOnly={!isAdmin} />
+              <Input
+                type="tel"
+                value={phone}
+                isReadOnly={!isAdmin}
+                onChange={onChangePhone}
+              />
             </FormControl>
           </Stack>
         </ModalBody>

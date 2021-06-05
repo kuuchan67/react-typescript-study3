@@ -1,8 +1,9 @@
-import {
+import React, {
   createContext,
   Dispatch,
   ReactNode,
   SetStateAction,
+  useContext,
   useState
 } from "react";
 import { User } from "../types/api/user";
@@ -27,3 +28,6 @@ export const LoginUserProvider = (props: { children: ReactNode }) => {
     </LoginUserContext.Provider>
   );
 };
+
+export const useLoginUser = (): LoginUserContextType =>
+  useContext(LoginUserContext);
